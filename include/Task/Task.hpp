@@ -1,3 +1,4 @@
+#pragma once
 #include "awaiter/PreviousAwaiter.hpp"
 #include <coroutine>
 #include <exception>

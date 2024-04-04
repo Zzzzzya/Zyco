@@ -1,14 +1,21 @@
 #include "debug.hpp"
 #include "Task/Task.hpp"
+#include "TimerLoop/TimerLoop.hpp"
+
+zyco::Loop loop;
 
 zyco::Task<int> hello1(){
-    debug(),"hello1";
-    co_return 20;
+    for(int i=0;i<30;i++){
+        co_await sleep_for(loop,std::chrono::seconds(1));
+        debug(),"hello1 1s";
+    }
 }
 
 zyco::Task<> hello2(){
-    debug(),"hello2";
-    co_return;
+    for(int i=0;i<10;i++){
+        co_await sleep_for(loop,std::chrono::seconds(3));
+        debug(),"         hello2 3s";
+    }
 }
 
 zyco::Task<int> hello_main(){
@@ -16,7 +23,10 @@ zyco::Task<int> hello_main(){
     auto t1 = hello1();
     auto t2 = hello2();
 
-    t1.mCoroutine.resume();
+    loop.addTask(t1);
+    loop.addTask(t2);
+
+    loop.runAll();
 
     co_return 30;
 }
@@ -28,7 +38,6 @@ int main(){
 
     while(!t.mCoroutine.done()){
         t.mCoroutine.resume();
-        debug(),t.mCoroutine.promise().result();
     }
     return 0;
 }
