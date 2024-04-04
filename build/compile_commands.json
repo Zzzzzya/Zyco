@@ -1,0 +1,7 @@
+[
+{
+  "directory": "/home/zya/Code/project/coroutine/Zyco/build",
+  "command": "/usr/bin/g++  -I/home/zya/Code/project/coroutine/Zyco/include -g -std=gnu++20 -o CMakeFiles/app.dir/src/main.cpp.o -c /home/zya/Code/project/coroutine/Zyco/src/main.cpp",
+  "file": "/home/zya/Code/project/coroutine/Zyco/src/main.cpp"
+}
+]
